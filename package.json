@@ -1,0 +1,53 @@
+{
+  "name": "wetube",
+  "version": "1.0.0",
+  "description": "Youtube Clone built using NodeJS, Express, Mongo and ES6",
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/loBolyCoder/wetube.git"
+  },
+  "scripts": {
+    "start": "node build/init.js",
+    "build": "npm run build:server && npm run build:assets",
+    "build:server": "babel src -d build",
+    "build:assets": "webpack --mode=production",
+    "dev:server": "nodemon",
+    "dev:assets": "webpack --mode=development -w"
+  },
+  "author": "loBolyCoder",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loBolyCoder/wetube/issues"
+  },
+  "homepage": "https://github.com/loBolyCoder/wetube#readme",
+  "dependencies": {
+    "@ffmpeg/core": "^0.8.5",
+    "@ffmpeg/ffmpeg": "^0.9.7",
+    "babel-loader": "^8.2.2",
+    "bcrypt": "^5.0.1",
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.0.7",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "node-fetch": "^2.6.1",
+    "pug": "^3.0.2",
+    "regenerator-runtime": "^0.13.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6",
+    "css-loader": "^6.4.0",
+    "mini-css-extract-plugin": "^2.4.2",
+    "nodemon": "^2.0.12",
+    "sass": "^1.42.1",
+    "sass-loader": "^12.1.0",
+    "webpack": "^5.58.1",
+    "webpack-cli": "^4.9.0"
+  }
+}
