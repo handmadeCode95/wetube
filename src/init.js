@@ -8,6 +8,6 @@ import app from "./server";
 
 const PORT = process.env.PORT || 4000;
 const handleListening = () =>
-	console.log(`✅ Server Listening on port ${PORT}🚀\n🔗 https://wetube-vfdtu.run.goorm.io`);
+	console.log(`✅ Server Listening on port ${PORT}🚀\n🔗 https://itzytube.herokuapp.com`);
 
 app.listen(PORT, handleListening);

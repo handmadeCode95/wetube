@@ -1,4 +1,4 @@
-# Wetube
+# itzytube
 
 / -> Home
 /Join -> Join

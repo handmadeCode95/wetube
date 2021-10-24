@@ -58,7 +58,6 @@ export const postLogin = async (req, res) => {
 	
 	req.session.loggedIn = true;
 	req.session.user = user;
-	
 	req.flash("info", "Login complete.");
 	return res.redirect("/");
 };
@@ -135,6 +134,7 @@ export const finishGithubLogin = async (req, res) => {
 		};
 		req.session.loggedIn = true;
 		req.session.user = user;
+		req.flash("info", "Login complete.");
 		return res.redirect("/");
 	} else {
 		return res.redirect("/login");
