@@ -111,43 +111,35 @@ const handleMouseLeave = () => {
 	controlsTimeout = setTimeout(hideControls, 1000);
 };
 
-const arrowLeftKey = (videoCurrentTime) => {
+const handleLeftKey = (videoCurrentTime) => {
 	if(videoCurrentTime < videoDuration) {
-		video.currentTime = videoCurrentTime - 5;
-		timeline.value = videoCurrentTime - 5;
+		video.currentTime = timeline.value = videoCurrentTime - 5;
 		leftArrow.classList.add("showing");
 		leftArrowTimeout = setTimeout(() => leftArrow.classList.remove("showing"), 1000);
 	};
 };
 
-const arrowRightKey = (videoCurrentTime) => {
+const handleRightKey = (videoCurrentTime) => {
 	if(videoCurrentTime < videoDuration) {
-		video.currentTime = videoCurrentTime + 5;
-		timeline.value = videoCurrentTime + 5;
+		video.currentTime = timeline.value = videoCurrentTime + 5;
 		rightArrow.classList.add("showing");
 		rightArrowTimeout = setTimeout(() => rightArrow.classList.remove("showing"), 1000);
 	};
 };
 
-// 수정필요...
-
-const arrowUpKey = () => {
+const handleUpKey = () => {
 	if (volumeValue < 0.1) {
 		muteBtnIcon.classList = "fas fa-volume-up";
 		video.muted = false;
 	};
-	if (volumeValue <= 0.9) {
-		volumeRange.value += 0.1;
-		volumeValue += 0.1;
-		video.volume = volumeRange.value = volumeValue;
+	if (volumeValue < 1) {
+		video.volume = volumeRange.value = volumeValue = Math.round((volumeValue + 0.1) * 10) / 10;
 	};
 };
 
-const arrowDownKey = () => {
-	if (volumeValue >= 0.1) {
-		volumeRange.value -= 0.1;
-		volumeValue -= 0.1;
-		video.volume = volumeRange.value = volumeValue;
+const handleDownKey = () => {
+	if (volumeValue > 0) {
+		video.volume = volumeRange.value = volumeValue = Math.round((volumeValue - 0.1) * 10) / 10;
 	};
 	if (volumeValue < 0.1) {
 		muteBtnIcon.classList = "fas fa-volume-mute";
@@ -173,16 +165,16 @@ const handleKeyup = (event) => {
 			if(fullScreen) handleFullScreen();
 			break;
 		case "ArrowRight":
-			arrowRightKey(videoCurrentTime);
+			handleRightKey(videoCurrentTime);
 			break;
 		case "ArrowLeft":
-			arrowLeftKey(videoCurrentTime);
+			handleLeftKey(videoCurrentTime);
 			break;
 		case "ArrowUp":
-			arrowUpKey();
+			handleUpKey();
 		  break;
 		case "ArrowDown":
-			arrowDownKey();
+			handleDownKey();
 			break;
 		default:
 			break;

@@ -19,6 +19,7 @@ export const postJoin = async (req, res) => {
 		req.flash("error", "This username/email is already taken.");
 		return res.status(400).render("join", {pageTitle});
 	};
+	
 	try {
 		await User.create({
 			name,
@@ -27,6 +28,7 @@ export const postJoin = async (req, res) => {
 			password,
 			location,
 		});
+		req.flash("info", "Join complete.");
 		return res.redirect("/login");
 	} catch(error) {
 		req.flash("error", error._message);
@@ -142,7 +144,6 @@ export const finishGithubLogin = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-	// req.session.destory();
 	req.session.user = null;
 	req.session.loggedIn = false;
 	req.flash("info", "Logout complete.");
@@ -154,7 +155,6 @@ export const getEdit = (req, res) => {
 };
 
 export const postEdit = async (req, res) => {
-	// 8.3 코드챌린지 : 이메일, 유저네임 업데이트 시 유니크인지 확인
 	const {
 		session: {
 			user: {_id, avatarUrl},
@@ -162,6 +162,12 @@ export const postEdit = async (req, res) => {
 		body: {name, email, username, location},
 		file,
 	} = req;
+	
+	const usernameExists = await User.exists( { $or: [{username}, {email}] } );
+	if(usernameExists) {
+		req.flash("error", "This username/email is already taken.");
+		return res.status(400).render("users/edit-profile", {pageTitle: "Edit Profile"});
+	};
 	
 	const isHeroku = process.env.NODE_ENV === "production";
 	const updatedUser = await User.findByIdAndUpdate(

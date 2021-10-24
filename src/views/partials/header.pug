@@ -15,8 +15,8 @@ header
 					a(href="/users/logout") Logout
 				li
 					a(href=`/users/${loggedInUser._id}`)
-						if loggedInUser.avatarUrl === ""
-							span 😀
+						if String(loggedInUser.avatarUrl) === String("undefined")
+							img.header__avatar(src="https://itzytube.s3.ap-northeast-2.amazonaws.com/images/res/itzy.jpg", crossorigin)
 						else
 							if isHeroku
 								img.header__avatar(src=loggedInUser.avatarUrl, crossorigin)

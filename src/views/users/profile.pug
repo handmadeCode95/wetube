@@ -3,10 +3,13 @@ include ../mixin/video
 
 block content
 	div.profile__data
-		if isHeroku
-			img.header__avatar(src=loggedInUser.avatarUrl, crossorigin).avatar
+		if String(loggedInUser.avatarUrl) === String("undefined")
+			img.avatar(src="https://itzytube.s3.ap-northeast-2.amazonaws.com/images/res/itzy.jpg", crossorigin)
 		else
-			img.header__avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin).avatar
+			if isHeroku
+				img.avatar(src=loggedInUser.avatarUrl, crossorigin)
+			else
+				img.avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin)
 		h3=user.name
 	div.video-grid
 		each video in user.videos

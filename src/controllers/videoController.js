@@ -3,16 +3,6 @@ import Comment from "../models/Comment"
 import User from "../models/User"
 
 
-/* callback
-export const home = (req, res) => {
-	Video.find({}, (error, videos) => {
-		if(error) {
-			return res.render("server-error");
-		}
-		return res.render("home", {pageTitle: "Home", videos});
-	});
-};
-*/
 export const home = async (req, res) => {
 	try {
 		const videos = await Video.find({}).sort({ createdAt: "desc" }).populate("owner");
@@ -24,7 +14,7 @@ export const home = async (req, res) => {
 
 export const watch = async (req, res) => {
 	const {id} = req.params;
-	const video = await Video.findById(id).populate("owner").populate("comments");
+	const video = await Video.findById(id).populate("owner").populate("comments").populate("owner");
 	if(!video) {
 		return res.render("404", {pageTitle: "Video not found."});
 	};
