@@ -145,6 +145,7 @@ export const createComment = async (req, res) => {
 	video.comments.push(comment._id);
 	video.save();
 	
+	req.flash("success", "Add comment.");
 	return res.status(201).json({newCommentId: comment._id});
 };
 
@@ -164,5 +165,6 @@ export const deleteComment = async (req, res) => {
 	};
 	
 	await Comment.findByIdAndDelete(id);
+	req.flash("success", "Delete comment.");
 	return res.sendStatus(200);
 };
