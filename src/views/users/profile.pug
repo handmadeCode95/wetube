@@ -3,7 +3,11 @@ include ../mixin/video
 
 block content
 	div.profile__data
-		img(src="/" + user.avatarUrl).avatar
+		if loggedInUser.avatarUrl
+			if loggedInUser.avatarUrl.includes("github")
+				img.header__avatar(src=loggedInUser.avatarUrl, crossorigin).avatar
+			else
+				img.header__avatar(src=loggedInUser.avatarUrl).avatar
 		h3=user.name
 	div.video-grid
 		each video in user.videos
