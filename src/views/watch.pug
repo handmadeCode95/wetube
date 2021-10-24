@@ -3,9 +3,9 @@ extends base
 block content
 	div#videoContainer(data-id=video._id)
 		if isHeroku
-			video(src=video.fileUrl, crossorigin, width="80%")
+			video(src=video.fileUrl, crossorigin, width="100%")
 		else
-			video(src=`/${video.fileUrl}`, crossorigin, width="80%")
+			video(src=`/${video.fileUrl}`, crossorigin, width="100%")
 		div#videoControls.videoControls
 			div.videoControls__play
 				span#play.videoControls__playBtn
