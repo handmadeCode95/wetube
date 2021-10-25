@@ -35,8 +35,6 @@ export const postJoin = async (req, res) => {
 		return res.status(400).render("join", {pageTitle});
 	};
 };
-export const edit = (req, res) => res.send("Edit User");
-export const remove = (req, res) => res.send("Remove User");
 
 export const getLogin = (req, res) => {
 	res.render("login", {pageTitle: "Login"});
@@ -157,16 +155,25 @@ export const getEdit = (req, res) => {
 export const postEdit = async (req, res) => {
 	const {
 		session: {
-			user: {_id, avatarUrl},
+			user: {_id, username, email, avatarUrl},
 		},
-		body: {name, email, username, location},
+		body: {name, email: newEmail, username: newUsername, location},
 		file,
 	} = req;
 	
-	const usernameExists = await User.exists( { $or: [{username}, {email}] } );
-	if(usernameExists) {
-		req.flash("error", "This username/email is already taken.");
-		return res.status(400).render("users/edit-profile", {pageTitle: "Edit Profile"});
+	if(username === newUsername) {
+		const usernameExists = await User.exists(username);
+		if(usernameExists) {
+			req.flash("error", "This username is already taken.");
+			return res.status(400).render("users/edit-profile", {pageTitle: "Edit Profile"});
+		};
+	};
+	if(email === newEmail) {
+		const emailExists = await User.exists(email);
+		if(emailExists) {
+			req.flash("error", "This email is already taken.");
+			return res.status(400).render("users/edit-profile", {pageTitle: "Edit Profile"});
+		};
 	};
 	
 	const isHeroku = process.env.NODE_ENV === "production";
