@@ -151,18 +151,25 @@ const handleKeyup = (event) => {
 	const keyCode = event.code;
 	const fullScreen = document.fullscreenElement;
 	const videoCurrentTime = Math.floor(video.currentTime);
+	const textarea = document.querySelector("textarea");
+	const activeElement = document.activeElement;
 	switch(keyCode) {
 		case "Space":
-			handlePlayAndStop();
+			if(textarea !== activeElement) {
+				handlePlayAndStop();
+			};
 			break;
 		case "KeyF":
-			const textarea = document.querySelector("textarea");
-			const activeElement = document.activeElement;
-			if(textarea === activeElement) break;
-			if(!fullScreen) handleFullScreen();
+			if(textarea !== activeElement) {
+				if(!fullScreen) {
+					handleFullScreen();
+				};
+			};
 			break;
 		case "Escape":
-			if(fullScreen) handleFullScreen();
+			if(fullScreen) {
+				handleFullScreen();
+			};
 			break;
 		case "ArrowRight":
 			handleRightKey(videoCurrentTime);
