@@ -161,15 +161,16 @@ export const postEdit = async (req, res) => {
 		file,
 	} = req;
 	
-	if(username === newUsername) {
-		const usernameExists = await User.exists(username);
+	
+	if(username !== newUsername) {
+		const usernameExists = await User.exists({username});
 		if(usernameExists) {
 			req.flash("error", "This username is already taken.");
 			return res.status(400).render("users/edit-profile", {pageTitle: "Edit Profile"});
 		};
 	};
-	if(email === newEmail) {
-		const emailExists = await User.exists(email);
+	if(email !== newEmail) {
+		const emailExists = await User.exists({email});
 		if(emailExists) {
 			req.flash("error", "This email is already taken.");
 			return res.status(400).render("users/edit-profile", {pageTitle: "Edit Profile"});
