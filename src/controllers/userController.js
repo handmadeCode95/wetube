@@ -181,8 +181,8 @@ export const postEdit = async (req, res) => {
 		_id, {
 			avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
 			name,
-			email,
-			username,
+			email: newEmail,
+			username: newUsername,
 			location,
 		}, {new: true}
 	);
