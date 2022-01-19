@@ -1,7 +1,7 @@
 # ITZY tube
-> https://itzytube.herokuapp.com/
-> Backend : Node.js(Express)/MongoDB/AWS
-> Frontend : Javascript/Pug/SCSS
+> * https://itzytube.herokuapp.com/
+> * Backend : Node.js(Express)/MongoDB/AWS
+> * Frontend : Javascript/Pug/SCSS
 ---------------------------------------
 ## 기능 설명
 > 1. Create
